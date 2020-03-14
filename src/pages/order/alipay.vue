@@ -1,13 +1,13 @@
 <template>
   <div>
-    详情
+    alipay
   </div>
 
 </template>
 
 <script>
 export default {
-  name: 'detail'
+  name: 'alipay'
 
 }
 </script>
