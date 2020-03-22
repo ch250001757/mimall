@@ -4,6 +4,7 @@ import vueAxios from 'vue-axios'
 import App from './App.vue'
 import router from './router'
 import VueLazyload from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
 // import env from './env'
 // mock开关
 const mock = false
@@ -33,6 +34,7 @@ axios.interceptors.response.use(function (response) {
 });
 
 Vue.use(vueAxios, axios)
+Vue.use(VueCookie)
 Vue.config.productionTip = false
 Vue.use(VueLazyload, {
   loading: '/imgs/loading-svg/loading-spinning-bubbles.svg',
