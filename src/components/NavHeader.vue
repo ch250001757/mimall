@@ -9,13 +9,14 @@
           <a href="javascript:;">协议规则</a>
         </div>
         <div class="topbar-user">
+          <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" v-if="!username" @click="gotoLogin">登录</a>
-          <a href="javascript:;" v-else>{{username}}</a>
+          <a href="javascript:;" v-if="username" @click="loginOut">退出</a>
           <a href="javascript:;" v-if="username">我的订单</a>
           <a href="javascript:;">注册</a>
-          <a href="javascript:;" class="mycard" @click="gotoCard">
+          <a href="javascript:;" class="mycard" @click="gotoCart">
             <span class="card-icon"></span>
-            <span>购物车</span>
+            <span>购物车({{cartCount}})</span>
           </a>
         </div>
       </div>
@@ -70,15 +71,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: "nav-header",
   data() {
     return {
       phoneList: [],
-      username: 'CH'
     }
   },
+  computed: {
+    username() {
+      return this.$store.state.username
+    },
+    ...mapState(['cartCount'])
+  },
   mounted() {
+    if (this.$route.params && this.$route.params.from == 'login') {
+      this.getCartCount()
+    }
     this.getProduct()
   },
   filters: {
@@ -99,12 +109,25 @@ export default {
         this.phoneList = phoneList.slice(0, 6)
       })
     },
-    gotoCard() {
-      this.$router.push('/card')
+    gotoCart() {
+      this.$router.push('/cart')
     },
     gotoLogin() {
       this.$router.push('/login')
     },
+    loginOut() {
+      this.axios.post('/user/logout').then(() => {
+        this.$message.success('退出成功')
+        this.$cookie.set('userId', '', { expires: '-1' })
+        this.$store.dispatch('saveUserName', '')
+        this.$store.dispatch('saveCartCount', '')
+      })
+    },
+    getCartCount() {
+      this.axios.get('/carts/products/sum').then((res = 0) => {
+        this.$store.dispatch('saveCartCount', res);
+      })
+    }
   }
 
 
@@ -153,31 +176,7 @@ export default {
       display: flex;
       align-items: center;
       position: relative;
-      .header-logo {
-        width: 55px;
-        height: 55px;
-        background: #ff6600;
-        a {
-          display: inline-block;
-          width: 110px;
-          height: 55px;
 
-          &::before {
-            content: ' ';
-            @include bgImg(55px, 55px, '/imgs/mi-home.png');
-            transition: margin 0.3s;
-          }
-          &::after {
-            content: ' ';
-            display: inline-block;
-            @include bgImg(55px, 55px, '/imgs/mi-logo.png');
-          }
-          &:hover::before {
-            margin-left: -55px;
-            transition: margin 0.3s;
-          }
-        }
-      }
       .header-menu {
         padding-left: 160px;
         .item-menu {

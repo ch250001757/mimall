@@ -33,6 +33,11 @@ export default new Router({
       component: () => import('@/pages/cart'),
     },
     {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/pages/login'),
+    },
+    {
       path: '/order',
       name: 'order',
       component: () => import('@/pages/order/order'),

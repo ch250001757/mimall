@@ -6,7 +6,7 @@
 
 <script>
 // import storageDefine from './storage'
-
+import 'element-ui/lib/theme-chalk/index.css';
 export default {
   name: 'App',
   components: {
@@ -21,6 +21,7 @@ export default {
     // this.axios.get('/user/login').then(res => {
     //   console.log(res)
     // })
+    // 登录过才调用
     if (this.$cookie.get('userId')) {
       this.getUser();
       this.getCartCount();
@@ -45,4 +46,5 @@ export default {
 @import './assets/scss/reset.scss';
 @import './assets/scss/config.scss';
 @import './assets/scss/button.scss';
+@import './assets/scss/base.scss';
 </style>

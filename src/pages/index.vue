@@ -79,7 +79,7 @@
                   <p class="name">{{subitem.name}}</p>
                   <p class="dec">{{subitem.subtitle}}</p>
                 </a>
-                <p class="price" @click="addCard(item.id)">{{subitem.price}}元</p>
+                <p class="price" @click="addCard(subitem.id)">{{subitem.price}}元</p>
               </div>
             </div>
           </div>
@@ -173,8 +173,18 @@ export default {
         this.phoneList = [phoneList.slice(6, 10), phoneList.slice(10, 14)]
       })
     },
-    addCard() {
-      this.showModal = true
+    addCard(id) {
+      this.axios.post('carts', {
+        productId: id,
+        selected: true
+      }).then(res => {
+        this.$store.dispatch('saveCartCount', res.cartTotalQuantity)
+        this.showModal = true
+      }).catch(err => {
+        if (err.status == 10) {
+          window.location.href = '/#/login'
+        }
+      })
     },
     gotoCard() {
       this.$router.push('/cart')

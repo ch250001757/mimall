@@ -1,6 +1,76 @@
+@import './mixin.scss';
+
 .container {
   width: 1226px;
   min-width: 1226px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+}
+
+input {
+  outline: none;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.clearfix:after {
+  /*伪元素是行内元素 正常浏览器清除浮动方法*/
+  content: " ";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.clearfix {
+  *zoom: 1;
+  /*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
+}
+
+// .clearfix::before,
+// .clearfix::after {
+//   content: ' ';
+//   display: table;
+// }
+
+// .clearfix::after {
+//   clear: both;
+// }
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.header-logo {
+  width: 55px;
+  height: 55px;
+  background: #ff6600;
+
+  a {
+    display: inline-block;
+    width: 110px;
+    height: 55px;
+
+    &::before {
+      content: ' ';
+      @include bgImg(55px, 55px, '/imgs/mi-home.png');
+      transition: margin 0.3s;
+    }
+
+    &::after {
+      content: ' ';
+      display: inline-block;
+      @include bgImg(55px, 55px, '/imgs/mi-logo.png');
+    }
+
+    &:hover::before {
+      margin-left: -55px;
+      transition: margin 0.3s;
+    }
+  }
 }

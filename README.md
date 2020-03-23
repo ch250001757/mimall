@@ -30,9 +30,11 @@ cnpm i axios vue-axios vue-router vuex vue-lazyload element-ui node-sass sass-lo
 
 看设计稿,提取公共组件,提取公共样式
 
+#### babel 编译器
 
+presets (预设) 预设规则帮助我们转换es6语法
 
-
+plugins 辅助性插件
 
 
 

@@ -48,8 +48,8 @@ export default {
   name: 'login',
   data() {
     return {
-      username: '',
-      password: '',
+      username: 'ch',
+      password: 'ch',
       userId: ''
     }
   },
@@ -74,9 +74,9 @@ export default {
     ...mapActions(['saveUserName']),
     register() {
       this.axios.post('/user/register', {
-        username: 'admin1',
-        password: 'admin1',
-        email: 'admin1@163.com'
+        username: 'ch',
+        password: 'ch',
+        email: 'ch@163.com'
       }).then(() => {
         this.$message.success('注册成功');
       })
@@ -85,6 +85,8 @@ export default {
 }
 </script>
 <style lang="scss">
+@import '@/assets/scss/base.scss';
+
 .login {
   & > .container {
     height: 113px;
@@ -97,6 +99,7 @@ export default {
     background: url('/imgs/login-bg.jpg') no-repeat center;
     .container {
       height: 576px;
+      position: relative;
       .login-form {
         box-sizing: border-box;
         padding-left: 31px;

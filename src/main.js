@@ -5,6 +5,10 @@ import App from './App.vue'
 import router from './router'
 import VueLazyload from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
+import store from './store/'
+import {
+  Message
+} from 'element-ui'
 // import env from './env'
 // mock开关
 const mock = false
@@ -23,16 +27,17 @@ axios.interceptors.response.use(function (response) {
   if (res.status == 0) {
     return res.data
   } else if (res.status == 10) {
-    // 未登录
-    window.location.href = '/#/login'
-  } else {
-    alert(res.meg)
+    if (location.hash != '#/index') {
+      // 未登录
+      window.location.href = '/#/login'
+    }
+    return Promise.reject(res);
   }
-}, function (error) {
+}, function (errr) {
   // 对响应错误做点什么
-  return Promise.reject(error);
+  return Promise.reject(errr);
 });
-
+Vue.prototype.$message = Message;
 Vue.use(vueAxios, axios)
 Vue.use(VueCookie)
 Vue.config.productionTip = false
@@ -42,5 +47,6 @@ Vue.use(VueLazyload, {
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
