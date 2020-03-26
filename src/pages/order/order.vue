@@ -37,12 +37,13 @@ export default {
       this.title = '订单列表'
       this.tip = '谨防钓鱼链接'
     } else if (url == '/order/pay') {
-      this.title = '订单列表'
+      this.title = '订单支付'
+      this.tip = '谨防钓鱼链接'
+    } else {
+      this.title = '订单支付'
       this.tip = '谨防钓鱼链接'
     }
-
   }
-
 }
 </script>
 

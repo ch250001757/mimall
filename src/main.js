@@ -33,9 +33,11 @@ axios.interceptors.response.use(function (response) {
     }
     return Promise.reject(res);
   }
-}, function (errr) {
+}, function (err) {
+  let res = err.response;
+  Message.error(res.data.message);
   // 对响应错误做点什么
-  return Promise.reject(errr);
+  return Promise.reject(err);
 });
 Vue.prototype.$message = Message;
 Vue.use(vueAxios, axios)
