@@ -12,5 +12,14 @@ module.exports = {
         }
       }
     }
+  },
+  // publicPath:'/app',
+  // outputDir:'dist',
+  // indexPath:'index2.html',
+  // lintOnSave:false,
+  productionSourceMap: true, // 把打包项目的源码 有/没有源码
+  // 删除预加载 真正按需
+  chainWebpack: (config) => {
+    config.plugins.delete('prefetch')
   }
 }

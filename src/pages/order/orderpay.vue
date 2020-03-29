@@ -1,5 +1,10 @@
 <template>
   <div class="order-pay">
+    <OrderHeader title="订单确认">
+      <template v-slot:tip>
+        <span>收货地址</span>
+      </template>
+    </OrderHeader>
     <div class="wrapper">
       <div class="container">
         <div class="order-wrap">
@@ -65,6 +70,7 @@
 </template>
 <script>
 import ScanPayCode from '@/components/ScanPayCode'
+import OrderHeader from '@/components/OrderHeader'
 import Modal from '@/components/Modal'
 import QRCode from 'qrcode'
 export default {
@@ -84,7 +90,8 @@ export default {
   },
   components: {
     ScanPayCode,
-    Modal
+    Modal,
+    OrderHeader
   },
   mounted() {
     this.goOrderList()

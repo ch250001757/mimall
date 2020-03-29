@@ -1,5 +1,10 @@
 <template>
   <div class="order-confirm">
+    <OrderHeader title="订单确认">
+      <template v-slot:tip>
+        <span>收货地址</span>
+      </template>
+    </OrderHeader>
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
       <defs>
         <symbol id="icon-add" viewBox="0 0 31 32">
@@ -19,6 +24,7 @@
         </symbol>
       </defs>
     </svg>
+
     <div class="wrapper">
       <div class="container">
         <div class="order-box">
@@ -144,10 +150,12 @@
 </template>
 <script>
 import Modal from '@/components/Modal'
+import OrderHeader from '@/components/OrderHeader'
 export default {
   name: 'order-confirm',
   components: {
-    Modal
+    Modal,
+    OrderHeader
   },
   mounted() {
     this.getAddressList()

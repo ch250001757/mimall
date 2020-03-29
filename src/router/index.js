@@ -9,11 +9,14 @@ export default new Router({
       path: '/',
       name: 'home',
       redirect: 'index',
-      component: () => import('@/pages/home'),
+      // component: () => import('@/pages/home'),
+      // promise
+      component: resolve => require(['../pages/home.vue'], resolve),
       children: [{
           path: 'index',
           name: 'index',
-          component: () => import('@/pages/index'),
+          // component: () => import('@/pages/index'),
+          component: resolve => require(['../pages/index.vue'], resolve),
         },
         {
           path: 'product/:id',
